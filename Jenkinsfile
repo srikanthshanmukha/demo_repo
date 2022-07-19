@@ -2,19 +2,28 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('dev') {
+            when {
+                branch 'feature'
+            }
             steps {
-                echo 'Building..'
+                echo 'from feature branch..'
             }
         }
-        stage('Test') {
+        stage('QA') {
+            when {
+                branch 'develop'
+            }
             steps {
-                echo 'Testing..'
+                echo 'from develop branch'
             }
         }
-        stage('Deploy') {
+        stage('prod') {
+            when {
+                branch 'master'
+            }
             steps {
-                echo 'Deploying....'
+                echo 'from master branch'
             }
         }
     }
